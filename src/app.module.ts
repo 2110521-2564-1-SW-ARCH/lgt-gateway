@@ -32,7 +32,7 @@ import { UserModule } from './user/user.module';
       },
     }),
     UserModule,
-    AuthModule
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
