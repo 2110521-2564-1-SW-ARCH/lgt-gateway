@@ -7,17 +7,7 @@ import { JwtModule } from "@nestjs/jwt";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 
 @Module({
-  imports: [
-    HttpModule,
-    JwtModule.registerAsync({
-      imports: [ConfigModule],
-      useFactory: async () => ({
-        secret: process.env.JWT_SECRET,
-      }),
-      inject: [ConfigService],
-    }),
-  ],
-  providers: [JwtUtil, AuthModule],
   controllers: [LocationController],
+  providers: [],
 })
 export class LocationModule {}
