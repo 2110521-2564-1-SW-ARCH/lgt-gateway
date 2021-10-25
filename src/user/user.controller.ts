@@ -19,10 +19,10 @@ export class UserController {
         return this.usersService.create(createUserDto);
     }
 
-    @Get(':username')
-    async findByUsername(@Param('username') username: string){
-        const userid = await this.usersService.findByUserName(username)
-        this.client.emit('getCurrentUserId',userid.id);
-        return userid;
-    }
+    // @Get(':username')
+    // async findByUsername(@Param('username') username: string){
+    //     const userid = await this.usersService.findByUserName(username)
+    //     this.client.emit('getCurrentUserId',userid.id);
+    //     return userid;
+    // }
 }
