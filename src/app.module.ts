@@ -5,6 +5,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
+import { RouteModule } from './route/route.module';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
@@ -31,8 +33,13 @@ import { UserModule } from './user/user.module';
         },
       },
     }),
+    HttpModule.register({
+      timeout: 5000,
+      maxRedirects: 5,
+    }),
     UserModule,
     AuthModule,
+    RouteModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,0 +1,53 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, closed]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{secrets.PASS_GIT}}
+      - name: Deploy nest js
+        uses: appleboy/ssh-action@v0.1.2
+        env:
+          POSTGRES_HOST: ${{secrets.POSTGRES_HOST}}
+          POSTGRES_PORT: ${{secrets.POSTGRES_PORT}}
+          POSTGRES_USER: ${{secrets.POSTGRES_USER}}
+          POSTGRES_PASSWORD: ${{secrets.POSTGRES_PASSWORD}}
+          POSTGRES_DATABASE: ${{secrets.POSTGRES_DATABASE}}
+          JWT_SECRET: ${{secrets.JWT_SECRET}}
+        with:
+          host: ${{secrets.SSH_HOST}}
+          key: ${{secrets.SSH_KEY}}
+          username: ${{secrets.SSH_USERNAME}}
+          envs: POSTGRES_HOST,POSTGRES_PORT,POSTGRES_USER,POSTGRES_PASSWORD,POSTGRES_DATABASE,JWT_SECRET
+          script: |
+            rm -R -f lgt-gateway
+            git clone https://${{secrets.USERNAME_GIT}}:${{secrets.PASS_GIT}}@github.com/2110521-2564-1-SW-ARCH/lgt-gateway.git
+            cd lgt-gateway
+            docker-compose down -v
+            touch .env
+            echo "POSTGRES_HOST=$POSTGRES_HOST" >> .env
+            echo "POSTGRES_PORT=$POSTGRES_PORT" >> .env
+            echo "POSTGRES_USER=$POSTGRES_USER" >> .env
+            echo "POSTGRES_PASSWORD=$POSTGRES_PASSWORD" >> .env
+            echo "POSTGRES_DATABASE=$POSTGRES_DATABASE" >> .env
+            echo "JWT_SECRET=$JWT_SECRET" >> .env
+            docker-compose build
+            docker-compose up -d 
+            echo 'Deployment prod complete'
