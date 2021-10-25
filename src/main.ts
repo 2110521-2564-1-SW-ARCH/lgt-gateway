@@ -12,6 +12,7 @@ async function bootstrap() {
     .setTitle("Let's go travel: Gateway Service")
     .setDescription('The Gateway Service API Description')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('/docs', app, document);
