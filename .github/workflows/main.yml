@@ -49,5 +49,5 @@ jobs:
             echo "POSTGRES_DATABASE=$POSTGRES_DATABASE" >> .env
             echo "JWT_SECRET=$JWT_SECRET" >> .env
             docker-compose build
-            docker-compose up  
+            docker-compose up -d 
             echo 'Deployment prod complete'
