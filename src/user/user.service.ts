@@ -19,6 +19,7 @@ export class UserService {
 
       async findByUserName(userName: string) {
         return await Users.findOne({
+          select: ['id'],
           where: {
             userName: userName,
           },
