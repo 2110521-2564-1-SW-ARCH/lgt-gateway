@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { RouteModule } from './route/route.module';
 import { HttpModule } from '@nestjs/axios';
+import { LocationModule } from './location/location.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { HttpModule } from '@nestjs/axios';
     UserModule,
     AuthModule,
     RouteModule,
+    LocationModule,
   ],
   controllers: [AppController],
   providers: [AppService],
