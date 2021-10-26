@@ -32,11 +32,12 @@ jobs:
           POSTGRES_DATABASE: ${{secrets.POSTGRES_DATABASE}}
           JWT_SECRET: ${{secrets.JWT_SECRET}}
           ROUTE_URL: ${{secrets.ROUTE_URL}}
+          MONGODB_URI: ${{secrets.MONGODB_URI}}
         with:
           host: ${{secrets.SSH_HOST}}
           key: ${{secrets.SSH_KEY}}
           username: ${{secrets.SSH_USERNAME}}
-          envs: POSTGRES_HOST,POSTGRES_PORT,POSTGRES_USER,POSTGRES_PASSWORD,POSTGRES_DATABASE,JWT_SECRET,ROUTE_URL
+          envs: POSTGRES_HOST,POSTGRES_PORT,POSTGRES_USER,POSTGRES_PASSWORD,POSTGRES_DATABASE,JWT_SECRET,ROUTE_URL,MONGODB_URI
           script: |
             rm -R -f lgt-gateway
             git clone https://${{secrets.USERNAME_GIT}}:${{secrets.PASS_GIT}}@github.com/2110521-2564-1-SW-ARCH/lgt-gateway.git
@@ -50,6 +51,7 @@ jobs:
             echo "POSTGRES_DATABASE=$POSTGRES_DATABASE" >> .env
             echo "JWT_SECRET=$JWT_SECRET" >> .env
             echo "ROUTE_URL=$ROUTE_URL" >> .env
+            echo "MONGODB_URI=$MONGODB_URI" >> .env
             docker-compose build
             docker-compose up -d 
             echo 'Deployment prod complete'
