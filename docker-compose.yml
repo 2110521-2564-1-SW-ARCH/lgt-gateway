@@ -11,10 +11,10 @@ services:
     ports:
       - 8000:8000
     networks:
-      - nesjs-network
+      - gateway-network
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
     restart: unless-stopped
 networks:
-  nesjs-network:
+  gateway-network:

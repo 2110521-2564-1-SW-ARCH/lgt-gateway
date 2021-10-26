@@ -8,6 +8,8 @@ import { UserModule } from './user/user.module';
 import { RouteModule } from './route/route.module';
 import { HttpModule } from '@nestjs/axios';
 import { LocationModule } from './location/location.module';
+import { TravelPlanModule } from './travelplan/travelplan.module';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
@@ -34,6 +36,7 @@ import { LocationModule } from './location/location.module';
         },
       },
     }),
+    MongooseModule.forRoot(process.env.MONGODB_URI),
     HttpModule.register({
       timeout: 5000,
       maxRedirects: 5,
@@ -42,6 +45,7 @@ import { LocationModule } from './location/location.module';
     AuthModule,
     RouteModule,
     LocationModule,
+    TravelPlanModule,
   ],
   controllers: [AppController],
   providers: [AppService],
