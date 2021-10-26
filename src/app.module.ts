@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { RouteModule } from './route/route.module';
 import { HttpModule } from '@nestjs/axios';
+import { LocationModule } from './location/location.module';
 import { TravelPlanModule } from './travelplan/travelplan.module';
 import { MongooseModule } from '@nestjs/mongoose';
 
@@ -43,6 +44,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     UserModule,
     AuthModule,
     RouteModule,
+    LocationModule,
     TravelPlanModule,
   ],
   controllers: [AppController],
