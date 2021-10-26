@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { RouteModule } from './route/route.module';
 import { HttpModule } from '@nestjs/axios';
+import { TravelPlanModule } from './travelplan/travelplan.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { HttpModule } from '@nestjs/axios';
     UserModule,
     AuthModule,
     RouteModule,
+    TravelPlanModule,
   ],
   controllers: [AppController],
   providers: [AppService],

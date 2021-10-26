@@ -10,7 +10,6 @@ import { ClientProxy } from "@nestjs/microservices";
 export class UserController {
     constructor(
         private usersService: UserService,
-        @Inject('TRAVELPLAN_SERVICE') private readonly client: ClientProxy
     ) { }
 
     @HttpCode(HttpStatus.OK)
@@ -18,11 +17,4 @@ export class UserController {
     create(@Body() createUserDto: CreateUserDto) {
         return this.usersService.create(createUserDto);
     }
-
-    // @Get(':username')
-    // async findByUsername(@Param('username') username: string){
-    //     const userid = await this.usersService.findByUserName(username)
-    //     this.client.emit('getCurrentUserId',userid.id);
-    //     return userid;
-    // }
 }
