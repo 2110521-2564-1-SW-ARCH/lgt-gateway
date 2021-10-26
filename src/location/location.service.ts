@@ -10,7 +10,6 @@ import {
 
 import { grpcClientOptions } from "./grpc-location.options";
 import { Observable } from "rxjs";
-import { ApiTags } from "@nestjs/swagger";
 
 interface ILocationsService {
   getLocation(data: { id: number }): Observable<any>;
@@ -35,6 +34,7 @@ interface ILocationsService {
 
 @Injectable()
 export class LocationService implements OnModuleInit {
+  // @Client(grpcClientOptions) private readonly client: ClientGrpc;
   private locationsService: ILocationsService;
 
   constructor(@Inject("LOCATION_PACKAGE") private client: ClientGrpc) {}

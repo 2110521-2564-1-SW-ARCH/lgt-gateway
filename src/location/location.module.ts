@@ -4,25 +4,23 @@ import { ConfigService } from "@nestjs/config";
 import { ClientProxyFactory, Transport } from "@nestjs/microservices";
 import { join } from "path";
 import { LocationService } from './location.service';
+import { ClientsModule } from "@nestjs/microservices";
 
+console.log(join(__dirname, './location.proto'))
 @Module({
-  controllers: [LocationController],
-  providers: [
-    {
-      provide: "LOCATION_PACKAGE",
-      useFactory: (configService: ConfigService) => {
-        return ClientProxyFactory.create({
-          transport: Transport.GRPC,
-          options: {
-            package: "location",
-            protoPath: join(process.cwd(), "./src/location/location.proto"),
-            url: configService.get("GRPC_CONNECTION_URL"),
-          },
-        });
+  imports: [
+    ClientsModule.register([
+      {
+        name: 'LOCATION_PACKAGE',
+        transport: Transport.GRPC,
+        options: {
+          package: 'location',
+          protoPath: join(__dirname, './location.proto'),
+        },
       },
-      inject: [ConfigService],
-    },
-    LocationService,
+    ]),
   ],
+  controllers: [LocationController],
+  providers: [LocationService],
 })
 export class LocationModule {}
