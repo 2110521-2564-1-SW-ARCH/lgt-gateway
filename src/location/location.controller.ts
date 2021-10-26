@@ -1,25 +1,37 @@
-import { Controller, OnModuleInit, Inject, Param, Get } from '@nestjs/common';
-import { HttpService } from "@nestjs/axios";
-import {
-  GrpcMethod,
-  ClientGrpc,
-  Client,
-  Transport,
-} from '@nestjs/microservices';
+import { Controller, Param, Get, Post, Body, Delete } from '@nestjs/common';
 
-import { grpcClientOptions } from './grpc-location.options';
-import { Observable } from 'rxjs';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { LocationService } from './location.service';
+import { CreateLocationDto } from './dto/create-location.dto';
 
-
+@ApiBearerAuth()
 @ApiTags("location")
 @Controller("location")
 export class LocationController {
   constructor(private locationService: LocationService) { }
 
   @Get('all')
-  GetAllLocations() {
+  getAllLocations() {
     return this.locationService.getAllLocation();
+  }
+
+  @Get(':id') 
+  getLocation(@Param('id') id: number) {
+    return this.locationService.getLocation(id)
+  }
+
+  @Get('search/:keyword')
+  searchLocation(@Param('keyword') keyword: string) {
+    return this.locationService.searchLocation(keyword)
+  }
+
+  @Post()
+  addLocation(@Body() LocationPayload: CreateLocationDto) {
+    return this.locationService.addLocation(LocationPayload)
+  }
+
+  @Delete(':id')
+  deleteLocation(@Param('id') id: number) {
+    return this.locationService.deleteLocation(id)
   }
 }

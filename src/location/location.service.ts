@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Controller, OnModuleInit, Inject, Param, Get } from "@nestjs/common";
+import { OnModuleInit, Inject, Param } from "@nestjs/common";
 import { HttpService } from "@nestjs/axios";
 import {
   GrpcMethod,
@@ -10,26 +10,14 @@ import {
 
 import { grpcClientOptions } from "./grpc-location.options";
 import { Observable } from "rxjs";
+import { ILocation } from "./interfaces/location.interface";
 
 interface ILocationsService {
   getLocation(data: { id: number }): Observable<any>;
   getAllLocations(data: {}): Observable<any>;
-  addLocation(data: {
-    name: string;
-    description: string;
-    type: string;
-    address: string;
-    district: string;
-    subDistrict: string;
-    postCode: string;
-    province: string;
-    lattitude: string;
-    longitude: string;
-    imgURL: string;
-    closestStation: number;
-  }): Observable<any>;
+  addLocation(data: ILocation): Observable<any>;
   deleteLocation(data: { id: number }): Observable<any>;
-  searchLocation(data: { keywork: string }): Observable<any>;
+  searchLocation(data: { keyword: string }): Observable<any>;
 }
 
 @Injectable()
@@ -44,13 +32,23 @@ export class LocationService implements OnModuleInit {
       this.client.getService<ILocationsService>("LocationsService");
   }
 
-  @Get()
-  getLocation(@Param("id") id): Observable<string> {
+  getLocation(id: number): Observable<string> {
     return this.locationsService.getLocation({ id: id });
   }
 
-  @Get("all")
   getAllLocation(): Observable<string> {
     return this.locationsService.getAllLocations({});
+  }
+
+  addLocation(data: ILocation): Observable<string> {
+    return this.locationsService.addLocation(data)
+  }
+
+  deleteLocation(id: number): Observable<string> {
+    return this.locationsService.deleteLocation({id: id})
+  }
+
+  searchLocation(keyword: string): Observable<string> {
+    return this.locationsService.searchLocation({keyword: keyword})
   }
 }
