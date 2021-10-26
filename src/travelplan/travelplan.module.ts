@@ -1,11 +1,14 @@
 import { Module } from "@nestjs/common";
 import { ClientsModule, Transport } from "@nestjs/microservices";
+import { MongooseModule } from "@nestjs/mongoose";
 import { JwtStrategy } from "src/auth/jwt.strategy";
+import { TravelPlan, TravelPlanSchema } from "./model/travelplan.model";
 import { TravelPlanController } from "./travelplan.controller";
 import { TravelPlanService } from "./travelplan.service";
 
 @Module({
     imports:[
+        MongooseModule.forFeature([{name: TravelPlan.name ,schema: TravelPlanSchema}]),
         ClientsModule.register([
             {
               name: 'TRAVELPLAN_SERVICE',

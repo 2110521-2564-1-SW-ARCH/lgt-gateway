@@ -8,6 +8,7 @@ import { UserModule } from './user/user.module';
 import { RouteModule } from './route/route.module';
 import { HttpModule } from '@nestjs/axios';
 import { TravelPlanModule } from './travelplan/travelplan.module';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { TravelPlanModule } from './travelplan/travelplan.module';
         },
       },
     }),
+    MongooseModule.forRoot(process.env.MONGODB_URI),
     HttpModule.register({
       timeout: 5000,
       maxRedirects: 5,
