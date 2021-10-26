@@ -22,7 +22,7 @@ export class RouteController {
         ){}
 
     @HttpCode(HttpStatus.OK)
-    @Post('/search-route')
+    @Post('search-route')
     async searchRoute(@Headers('Authorization') auth: string, @Body() RoutePayload: GetRoutePayloadDto): Promise<Observable<AxiosResponse<any>>> {
         const headers = {
             'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ export class RouteController {
     }
 
     @HttpCode(HttpStatus.OK)
-    @Post('/save-route')
+    @Post('save-route')
     async createRoute(@Headers('Authorization') auth: string, @Body() RoutePayload: CreateRoutePayloadDto): Promise<Observable<AxiosResponse<any>>> {
         const headers = {
             'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ export class RouteController {
     }
 
     @HttpCode(HttpStatus.OK)
-    @Delete('/:id')
+    @Delete(':id')
     async deleteRoute(@Headers('Authorization') auth: string, @Param('id') routeId: number): Promise<Observable<AxiosResponse<any>>> {
         const headers = {
             'Content-Type': 'application/json',
