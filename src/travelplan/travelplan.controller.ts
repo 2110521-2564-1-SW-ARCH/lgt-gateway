@@ -32,9 +32,9 @@ export class TravelPlanController {
     //     return deletePlanPayloadDto
     // }
 
-    @Get('/get-user-plan')
-    async getUserPlan(@Body() deletePlanPayloadDto: DeletePlanPayloadDto){
-        return this.travelPlanService.findUserTravelPlan(deletePlanPayloadDto.userId)
+    @Get('/get-user-plan/:id')
+    async getUserPlan(@Param('id') id: number){
+        return this.travelPlanService.findUserTravelPlan(id)
     }
 
     @Get('/get-plan')
