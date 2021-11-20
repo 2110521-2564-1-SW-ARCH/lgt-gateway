@@ -23,24 +23,24 @@ export class RouteController {
 
     @HttpCode(HttpStatus.OK)
     @Post('search-route')
-    async searchRoute(@Headers('Authorization') auth: string, @Body() RoutePayload: GetRoutePayloadDto): Promise<Observable<AxiosResponse<any>>> {
+    async searchRoute(@Body() RoutePayload: GetRoutePayloadDto): Promise<Observable<AxiosResponse<any>>> {
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': auth,
+            // 'Authorization': auth,
         }
-        const tokenDecoded = this.jwtUtil.decode(auth)
-        if (tokenDecoded.userId){
+        // const tokenDecoded = this.jwtUtil.decode(auth)
+        // if (tokenDecoded.userId){
             return await this.http
-            .post(
-                `${process.env.ROUTE_URL}/api/routes/search-route`,
-                RoutePayload,
-                {
-                    headers: headers
-                })
-            .pipe(map(response => response.data))
-        } else {
-            throw new UnauthorizedException()
-        }
+        .post(
+            `${process.env.ROUTE_URL}/api/routes/search-route`,
+            RoutePayload,
+            {
+                headers: headers
+            })
+        .pipe(map(response => response.data))
+        // } else {
+        //     throw new UnauthorizedException()
+        // }
     }
 
     @HttpCode(HttpStatus.OK)
