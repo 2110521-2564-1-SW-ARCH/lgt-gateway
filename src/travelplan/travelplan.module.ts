@@ -1,3 +1,4 @@
+import { HttpModule } from "@nestjs/axios";
 import { Module } from "@nestjs/common";
 import { ClientsModule, Transport } from "@nestjs/microservices";
 import { MongooseModule } from "@nestjs/mongoose";
@@ -8,6 +9,7 @@ import { TravelPlanService } from "./travelplan.service";
 
 @Module({
     imports:[
+        HttpModule,
         MongooseModule.forFeature([{name: TravelPlan.name ,schema: TravelPlanSchema}]),
         ClientsModule.register([
             {
