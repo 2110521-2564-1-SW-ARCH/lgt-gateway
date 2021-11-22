@@ -1,9 +1,10 @@
 import { Prop, Schema } from "@nestjs/mongoose";
 import { IsArray, IsNotEmpty, IsNumber, IsString } from "class-validator";
 import { ObjectId } from "mongoose";
+import { ILocation } from "src/location/interfaces/location.interface";
 
 
-export class TravelPlanPayloadDto{
+export class FullTravelPlanPayloadDto{
     @IsString()
     @IsNotEmpty()
     userName: string
@@ -12,7 +13,7 @@ export class TravelPlanPayloadDto{
     planName: string
     @IsArray()
     @IsNotEmpty()
-    locations: number[]
+    locations: ILocation[]
     @IsString()
     description: string
 }

@@ -12,7 +12,7 @@ import { grpcClientOptions } from "./grpc-location.options";
 import { Observable } from "rxjs";
 import { ILocation } from "./interfaces/location.interface";
 
-interface ILocationsService {
+export interface ILocationsService {
   getLocation(data: { id: number }): Observable<any>;
   getAllLocations(data: {}): Observable<any>;
   addLocation(data: ILocation): Observable<any>;
