@@ -30,7 +30,11 @@ export class TravelPlanService {
   }
 
   async getAllPlans(){
-    return this.travelPlanModel.find().exec();
+    const allPublicPlans = this.travelPlanModel.find({isPublic:true})
+    if (!allPublicPlans){
+      throw new NotFoundException()
+    }
+    return allPublicPlans
   }
 
   async savePlan(travelPlanPayloadDto: TravelPlanPayloadDto){
