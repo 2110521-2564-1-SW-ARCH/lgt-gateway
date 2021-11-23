@@ -44,7 +44,8 @@ export class TravelPlanService {
             userName: travelPlanPayloadDto.userName,
             planName: travelPlanPayloadDto.planName,
             locations: locationList,
-            description: travelPlanPayloadDto.description
+            description: travelPlanPayloadDto.description,
+            isPublic: travelPlanPayloadDto.isPublic
           };
           this.client.emit('save-plan',fullTravelPlanPayloadDto);
           return fullTravelPlanPayloadDto;
