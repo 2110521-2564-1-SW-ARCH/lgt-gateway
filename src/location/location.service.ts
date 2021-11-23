@@ -32,7 +32,7 @@ export class LocationService implements OnModuleInit {
       this.client.getService<ILocationsService>("LocationsService");
   }
 
-  getLocation(id: number): Observable<string> {
+  getLocation(id: number): Observable<ILocation> {
     return this.locationsService.getLocation({ id: id });
   }
 

@@ -3,6 +3,7 @@ import { Module } from "@nestjs/common";
 import { ClientsModule, Transport } from "@nestjs/microservices";
 import { MongooseModule } from "@nestjs/mongoose";
 import { JwtStrategy } from "src/auth/jwt.strategy";
+import { LocationModule } from "src/location/location.module";
 import { TravelPlan, TravelPlanSchema } from "./model/travelplan.model";
 import { TravelPlanController } from "./travelplan.controller";
 import { TravelPlanService } from "./travelplan.service";
@@ -10,6 +11,7 @@ import { TravelPlanService } from "./travelplan.service";
 @Module({
     imports:[
         HttpModule,
+        LocationModule,
         MongooseModule.forFeature([{name: TravelPlan.name ,schema: TravelPlanSchema}]),
         ClientsModule.register([
             {
