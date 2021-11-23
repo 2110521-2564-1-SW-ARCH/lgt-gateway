@@ -22,7 +22,7 @@ export class TravelPlanService {
 
 
   async findUserTravelPlan(userName: string){
-    const userTravelPlan = this.travelPlanModel.findOne({userName: userName})
+    const userTravelPlan = this.travelPlanModel.find({userName: userName})
     if (!userTravelPlan){
         throw new NotFoundException()
     }
