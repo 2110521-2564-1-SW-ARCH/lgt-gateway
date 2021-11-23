@@ -1,22 +1,26 @@
 import { Prop, Schema } from "@nestjs/mongoose";
-import { IsArray, IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsArray, IsNotEmpty, IsString } from "class-validator";
+import { ApiProperty } from "@nestjs/swagger";
 import { ObjectId } from "mongoose";
+import { Type } from "class-transformer";
 
-interface Plan {
-    id: ObjectId;
-    locationId: number[];
-}
+export class TravelPlanPayloadDto {
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  userName: string;
 
-export class TravelPlanPayloadDto{
-    @IsNumber()
-    @IsNotEmpty()
-    userId: number
-    @IsString()
-    @IsNotEmpty()
-    planName: string
-    @IsArray()
-    @IsNotEmpty()
-    plan: Plan[]
-    @IsString()
-    description: string
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  planName: string;
+
+  @ApiProperty()
+  @IsArray()
+  @IsNotEmpty()
+  locations: number[];
+
+  @ApiProperty()
+  @IsString()
+  description: string;
 }
