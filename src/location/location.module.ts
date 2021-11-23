@@ -22,5 +22,6 @@ console.log(join(__dirname, './location.proto'))
   ],
   controllers: [LocationController],
   providers: [LocationService],
+  exports: [LocationService]
 })
 export class LocationModule {}

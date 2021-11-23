@@ -12,7 +12,7 @@ import { grpcClientOptions } from "./grpc-location.options";
 import { Observable } from "rxjs";
 import { ILocation } from "./interfaces/location.interface";
 
-interface ILocationsService {
+export interface ILocationsService {
   getLocation(data: { id: number }): Observable<any>;
   getAllLocations(data: {}): Observable<any>;
   addLocation(data: ILocation): Observable<any>;
@@ -32,7 +32,7 @@ export class LocationService implements OnModuleInit {
       this.client.getService<ILocationsService>("LocationsService");
   }
 
-  getLocation(id: number): Observable<string> {
+  getLocation(id: number): Observable<ILocation> {
     return this.locationsService.getLocation({ id: id });
   }
 
