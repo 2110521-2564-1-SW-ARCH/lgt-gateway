@@ -5,7 +5,9 @@ export type TravelPlanDocument = TravelPlan & Document;
 
 @Schema()
 export class TravelPlan{
-    @Prop({unique: true})
+    @Prop({unique:true})
+    planId: number
+    @Prop()
     userName: string
     @Prop()
     planName: string
