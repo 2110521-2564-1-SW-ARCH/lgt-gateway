@@ -15,8 +15,8 @@ export class LocationController {
     return this.locationService.getAllLocation();
   }
 
-  @Get(':id') 
-  getLocation(@Param('id') id: number) {
+  @Get(':ids') 
+  getLocation(@Param('ids') id: number) {
     return this.locationService.getLocation(id)
   }
 
