@@ -15,17 +15,8 @@ export class TravelPlanService {
     private readonly travelPlanModel: Model<TravelPlanDocument>
 ) {}
 
-  // async findByUserName(userName: string) {
-  //   return await Users.findOne({
-  //     select: ['id'],
-  //     where: {
-  //       userName: userName,
-  //     },
-  //   });
-  // }
-
-  async findUserTravelPlan(userId: number){
-    const userTravelPlan = this.travelPlanModel.findOne({userId: userId})
+  async findUserTravelPlan(userName: string){
+    const userTravelPlan = this.travelPlanModel.findOne({userName: userName})
     if (!userTravelPlan){
         throw new NotFoundException()
     }

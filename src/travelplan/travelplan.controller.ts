@@ -24,9 +24,9 @@ export class TravelPlanController {
     async savePlan(@Body() travelPlanPayloadDto: TravelPlanPayloadDto){
         const locations: ILocation[] = [];
         travelPlanPayloadDto.locations.forEach(async (lid:number) => {
-            console.log(lid)
-            const response = this.http.get('http://165.22.240.38:8000/docs/location/' + lid).pipe(map((res) => res.data))
+            const response = await this.http.get('http://localhost:8000/location/' + lid).pipe(map((res) => res.data)).toPromise()
             console.log(response)
+            locations.push(response)
         });
         const fullTravelPlanPayloadDto: FullTravelPlanPayloadDto = {
             userName: travelPlanPayloadDto.userName,
@@ -38,9 +38,9 @@ export class TravelPlanController {
         return fullTravelPlanPayloadDto;
     }
 
-    @Get('/get-user-plan/:id')
-    async getUserPlan(@Param('id') id: number){
-        return this.travelPlanService.findUserTravelPlan(id)
+    @Get('/get-user-plan/:userName')
+    async getUserPlan(@Param('userName') userName: string){
+        return this.travelPlanService.findUserTravelPlan(userName)
     }
 
     @Get('/get-plan')
